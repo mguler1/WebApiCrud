@@ -30,5 +30,19 @@ namespace WebApiCrud.Controllers
             }
             return Ok(category);
         }
+        [HttpPut]
+        public IActionResult UpdateCategory(Category c)
+        {
+            using var context = new WebApiCrudContext();
+            var updatecategory = context.Categories.Find(c.Id);
+            if (updatecategory==null)
+            {
+                return NotFound();
+            }
+            updatecategory.Name = c.Name;
+            context.Update(updatecategory);
+            context.SaveChanges();
+            return NoContent();
+        }
     }
 }
