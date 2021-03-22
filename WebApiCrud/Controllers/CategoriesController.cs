@@ -18,7 +18,17 @@ namespace WebApiCrud.Controllers
         {
             using var context = new WebApiCrudContext();
             return Ok( context.Categories.ToList());
-            
+        }
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            using var context = new WebApiCrudContext();
+         var category= context.Categories.Find(id);
+            if (category==null)
+            {
+                return NotFound();
+            }
+            return Ok(category);
         }
     }
 }
