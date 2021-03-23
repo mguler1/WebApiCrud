@@ -24,7 +24,7 @@ namespace WebApiCrud
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(opt=> { opt.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore; });//default olarak birden fazla tablodan gelen verileri listelemek için
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

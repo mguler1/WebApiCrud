@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,6 +65,19 @@ namespace WebApiCrud.Controllers
             context.Categories.Add(category);
             context.SaveChanges();
             return Created("",category);
+        }
+
+        [HttpGet("{id}/blogs")]
+        public IActionResult GetWithBlogsById(int id)
+        {
+            using var context = new WebApiCrudContext();
+            var categoryIdFind = context.Categories.Find(id);
+            if (categoryIdFind==null)
+            {
+                return NotFound();
+            }
+          var categorywithblogs=  context.Categories.Where(x => x.Id == id).Include(x => x.Blogs).ToList();
+            return Ok(categorywithblogs);
         }
     }
 }
