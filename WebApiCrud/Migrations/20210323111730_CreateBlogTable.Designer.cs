@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApiCrud.DaL.Context;
 
 namespace WebApiCrud.Migrations
 {
     [DbContext(typeof(WebApiCrudContext))]
-    partial class WebApiCrudContextModelSnapshot : ModelSnapshot
+    [Migration("20210323111730_CreateBlogTable")]
+    partial class CreateBlogTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

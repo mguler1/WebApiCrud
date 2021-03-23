@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 
 namespace WebApiCrud.DaL.Entities
 {
-    public class Category
+    public class Blog
     {
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public List<Blog> Blogs { get; set; }
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }
