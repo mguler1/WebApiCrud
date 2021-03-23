@@ -44,5 +44,26 @@ namespace WebApiCrud.Controllers
             context.SaveChanges();
             return NoContent();
         }
+        [HttpDelete("{id}")]
+        public IActionResult DeleteCategory(int id)
+        {
+            using var context = new WebApiCrudContext();
+          var deletedCategory=  context.Categories.Find(id);
+            if (deletedCategory==null)
+            {
+                return NotFound();
+            }
+            context.Remove(deletedCategory);
+            context.SaveChanges();
+            return NoContent();
+        }
+        [HttpPost]
+        public IActionResult AddCategory(Category category)
+        {
+            using var context = new WebApiCrudContext();
+            context.Categories.Add(category);
+            context.SaveChanges();
+            return Created("",category);
+        }
     }
 }
