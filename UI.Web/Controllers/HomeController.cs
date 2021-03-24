@@ -48,7 +48,7 @@ namespace UI.Web.Controllers
             ModelState.AddModelError("", "bir hata oluştu");
             return View(category);
         }
-        [HttpPut("{id}")]
+      
         public async Task<IActionResult> Edit(int id)
         {
             var httpClient = new HttpClient();
@@ -61,6 +61,19 @@ namespace UI.Web.Controllers
             }
             return RedirectToAction("Index");
 
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(Category category)
+        {
+            var httpClient = new HttpClient();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(category), Encoding.UTF8, "application/json");
+          var responseMessage=  await  httpClient.PutAsync("http://localhost:53853/api/Categories/", content);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", "Hata Oluştu");
+            return View(category);
         }
         public IActionResult Privacy()
         {
